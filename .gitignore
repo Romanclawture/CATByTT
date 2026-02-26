@@ -1,0 +1,5 @@
+node_modules/
+.catbytt/logs/
+.catbytt/alerts-*.txt
+.env
+.env.local
