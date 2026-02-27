@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# CATByTT Agent Monitor
+# StickyNicky Agent Monitor
 # Runs via cron every 10 minutes to babysit all agents
 # 100% deterministic — no LLM calls, pure script logic
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REGISTRY="${CATBYTT_HOME:-.catbytt}/active-tasks.json"
+REGISTRY="${CATBYTT_HOME:-.stickynicky}/active-tasks.json"
 ALERTS=""
 
 if [[ ! -f "$REGISTRY" ]]; then
@@ -21,7 +21,7 @@ if [[ -z "$TASKS" ]]; then
   exit 0
 fi
 
-echo "=== CATByTT Monitor $(date -u +%Y-%m-%dT%H:%M:%SZ) ==="
+echo "=== StickyNicky Monitor $(date -u +%Y-%m-%dT%H:%M:%SZ) ==="
 echo ""
 
 while IFS= read -r task; do
@@ -156,7 +156,7 @@ if [[ -n "$ALERTS" ]]; then
   echo -e "$ALERTS"
   
   # Write alerts to file for OpenClaw to pick up
-  ALERT_FILE="${CATBYTT_HOME:-.catbytt}/alerts-$(date +%s).txt"
+  ALERT_FILE="${CATBYTT_HOME:-.stickynicky}/alerts-$(date +%s).txt"
   echo -e "$ALERTS" > "$ALERT_FILE"
   echo ""
   echo "Alerts written to: $ALERT_FILE"

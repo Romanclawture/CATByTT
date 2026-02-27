@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# CATByTT Cleanup
+# StickyNicky Cleanup
 # Removes completed/failed task worktrees and cleans up registry
 
-REGISTRY="${CATBYTT_HOME:-.catbytt}/active-tasks.json"
-WORKTREE_BASE="/tmp/catbytt-worktrees"
+REGISTRY="${CATBYTT_HOME:-.stickynicky}/active-tasks.json"
+WORKTREE_BASE="/tmp/stickynicky-worktrees"
 
 if [[ ! -f "$REGISTRY" ]]; then
   echo "No registry found."
   exit 0
 fi
 
-echo "=== CATByTT Cleanup $(date) ==="
+echo "=== StickyNicky Cleanup $(date) ==="
 
 # Kill orphaned tmux sessions
 TASKS=$(jq -c '.[] | select(.status == "completed" or .status == "failed" or .status == "merged")' "$REGISTRY")
@@ -54,10 +54,10 @@ jq '[.[] | select(.status != "completed" and .status != "failed" and .status != 
   "$REGISTRY" > "${REGISTRY}.tmp" && mv "${REGISTRY}.tmp" "$REGISTRY"
 
 # Clean up old alert files (older than 24h)
-find "${CATBYTT_HOME:-.catbytt}/" -name "alerts-*.txt" -mmin +1440 -delete 2>/dev/null || true
+find "${CATBYTT_HOME:-.stickynicky}/" -name "alerts-*.txt" -mmin +1440 -delete 2>/dev/null || true
 
 # Clean up old log files (older than 7 days)
-find "${CATBYTT_HOME:-.catbytt}/logs/" -name "*.log" -mmin +10080 -delete 2>/dev/null || true
+find "${CATBYTT_HOME:-.stickynicky}/logs/" -name "*.log" -mmin +10080 -delete 2>/dev/null || true
 
 REMAINING=$(jq 'length' "$REGISTRY")
 echo ""

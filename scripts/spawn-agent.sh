@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# CATByTT Agent Spawner
+# StickyNicky Agent Spawner
 # Creates a git worktree + tmux session for a coding agent
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REGISTRY="${CATBYTT_HOME:-.catbytt}/active-tasks.json"
+REGISTRY="${CATBYTT_HOME:-.stickynicky}/active-tasks.json"
 
 # Defaults
 AGENT_TYPE="codex"
 MAX_AGENTS=5
-WORKTREE_BASE="/tmp/catbytt-worktrees"
+WORKTREE_BASE="/tmp/stickynicky-worktrees"
 
 usage() {
   cat <<EOF
@@ -65,12 +65,12 @@ fi
 # Generate branch name if not provided
 if [[ -z "$BRANCH" ]]; then
   SLUG=$(echo "$TASK" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g' | sed 's/--*/-/g' | cut -c1-50)
-  BRANCH="catbytt/${SLUG}-$(date +%s | tail -c 5)"
+  BRANCH="stickynicky/${SLUG}-$(date +%s | tail -c 5)"
 fi
 
 # Generate task ID
 TASK_ID="cat-$(date +%s)-$$"
-SESSION_NAME="catbytt-${TASK_ID}"
+SESSION_NAME="stickynicky-${TASK_ID}"
 
 # Check active agent count
 if [[ -f "$REGISTRY" ]]; then
@@ -93,7 +93,7 @@ git worktree add -b "$BRANCH" "$WORKTREE_PATH" origin/main 2>/dev/null || \
 echo "Worktree created."
 
 # Build the agent prompt
-PROMPT_FILE="${WORKTREE_PATH}/.catbytt-prompt.md"
+PROMPT_FILE="${WORKTREE_PATH}/.stickynicky-prompt.md"
 cat > "$PROMPT_FILE" <<PROMPT
 # Task: ${TASK}
 
@@ -136,7 +136,7 @@ case "$AGENT_TYPE" in
 esac
 
 # Log file
-LOG_DIR="${CATBYTT_HOME:-.catbytt}/logs"
+LOG_DIR="${CATBYTT_HOME:-.stickynicky}/logs"
 mkdir -p "$LOG_DIR"
 LOG_FILE="${LOG_DIR}/${TASK_ID}.log"
 

@@ -1,4 +1,4 @@
-# CATByTT — Coding Agent Team, Built by Two Tigers 🐯🐯
+# StickyNicky — Coding Agent Team, Built by Two Tigers 🐯🐯
 
 An AI coding agent swarm orchestrated through OpenClaw. One person, a fleet of coding agents, shipping like a full dev team.
 
@@ -40,7 +40,7 @@ You (Telegram) → OpenClaw (Orchestrator) → Coding Agents (Codex / Claude Cod
 
 ```bash
 # Clone into your OpenClaw workspace
-git clone https://github.com/Romanclawture/CATByTT.git
+git clone https://github.com/Romanclawture/StickyNicky.git
 
 # Make scripts executable
 chmod +x scripts/*.sh

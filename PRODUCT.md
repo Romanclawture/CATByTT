@@ -1,4 +1,4 @@
-# CATByTT — Catch A Tiger By The Tail 🐯
+# StickyNicky — Catch A Tiger By The Tail 🐯
 
 ## What It Is
 AI Visibility monitoring micro-SaaS. Track what AI models (ChatGPT, Gemini, Perplexity) say about your brand. Modeled after gumshoe.ai.

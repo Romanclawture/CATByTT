@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# CATByTT Status — Quick overview of all agents
+# StickyNicky Status — Quick overview of all agents
 
-REGISTRY="${CATBYTT_HOME:-.catbytt}/active-tasks.json"
+REGISTRY="${CATBYTT_HOME:-.stickynicky}/active-tasks.json"
 
 if [[ ! -f "$REGISTRY" ]]; then
   echo "No active tasks."
@@ -17,7 +17,7 @@ READY=$(jq '[.[] | select(.status == "ready_for_review")] | length' "$REGISTRY")
 FAILED=$(jq '[.[] | select(.status == "failed")] | length' "$REGISTRY")
 COMPLETED=$(jq '[.[] | select(.status == "completed" or .status == "merged")] | length' "$REGISTRY")
 
-echo "🐯 CATByTT Agent Status"
+echo "🐯 StickyNicky Agent Status"
 echo "========================"
 echo "  Running:          $RUNNING"
 echo "  PR Open:          $PR_OPEN"
